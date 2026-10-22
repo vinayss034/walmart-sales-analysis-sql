@@ -1,6 +1,10 @@
 use sql_project;
 
-select Customer_ID,monthname(Date_)As Month_Name,count(customer_ID) As No_Purchases from walmartsales
-group by Month_Name,Customer_ID
-Order by Month_Name asc;
+SELECT DISTINCT a.Customer_ID
+FROM walmartsales a, walmartsales b
+WHERE a.Customer_ID = b.Customer_ID
+AND DATEDIFF(
+    STR_TO_DATE(b.Date_, '%d-%m-%Y'),
+    STR_TO_DATE(a.Date_, '%d-%m-%Y')
+) BETWEEN 1 AND 30;
 
