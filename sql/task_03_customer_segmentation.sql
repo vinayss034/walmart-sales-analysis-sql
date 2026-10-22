@@ -1,9 +1,11 @@
 use sql_project;
-
-select Customer_ID,Branch,Customer_type,Gender,Total,
-CASE
-WHEN Total BETWEEN 0 AND 300 Then 'Low'
-WHEN Total BETWEEN 300 AND 700 Then 'Medium'
-Else 'High'
-END AS Spending_Behaviour
-from walmartsales;
+SELECT
+    Customer_ID,
+    SUM(Total) AS TotalSpending,
+    CASE
+        WHEN SUM(Total) < 500 THEN 'Low'
+        WHEN SUM(Total) <= 1500 THEN 'Medium'
+        ELSE 'High'
+    END AS SpendingTier
+FROM walmartsales
+GROUP BY Customer_ID;
