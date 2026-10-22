@@ -1,7 +1,11 @@
 use sql_project;
 
-select Gender,monthname(Date_) AS Month_Name,ROUND(SUM(Total),0) AS Total_Sales from walmartsales
-group by Gender,Month_Name
-Order BY Total_Sales desc;
+SELECT
+    Gender,
+    MONTHNAME(STR_TO_DATE(Date_, '%d-%m-%Y'))AS Month_Name,
+    ROUND(SUM(Total), 2) AS Total_Sales
+FROM walmartsales
+GROUP BY Gender, Month_Name
+ORDER BY month_name ;
 
 
