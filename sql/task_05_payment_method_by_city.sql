@@ -1,7 +1,7 @@
 use sql_project;
 
-SELECT City, Payment,count(Payment) AS PaymentCount
+SELECT City, Payment, COUNT(*) AS Total_Payments
 FROM walmartsales
 GROUP BY City, Payment
-ORDER BY City, PaymentCount DESC;
+ORDER BY City, Total_Payments DESC;
 
