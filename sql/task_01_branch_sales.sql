@@ -1,6 +1,9 @@
 use sql_project;
-
-SELECT Branch,SUM(ROUND(Total,0)) AS Total_Sales_Per_Branch,monthname(Date_) AS Month_Name
-FROM WalmartSales
-GROUP BY Branch,Month_Name
-ORDER BY Total_Sales_Per_Branch DESC;
+SELECT
+    Branch,
+    YEAR(STR_TO_DATE(Date_, '%d-%m-%Y')) AS SalesYear,
+    MONTHNAME(STR_TO_DATE(Date_, '%d-%m-%Y')) AS Month_Name,
+    SUM(Total) AS Total_Sales
+FROM walmartsales
+GROUP BY Branch, SalesYear ,Month_Name
+ORDER BY Branch, Total_Sales DESC;
